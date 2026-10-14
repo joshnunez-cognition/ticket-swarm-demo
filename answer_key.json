@@ -1,0 +1,105 @@
+{
+  "groups": [
+    {
+      "group": "hardcoded-aws-key",
+      "tickets": [
+        "APP-2268",
+        "CSP-9112",
+        "PEN-2024-029",
+        "SCA-4455",
+        "SIEM-88190"
+      ]
+    },
+    {
+      "group": "iam-wildcard-doc-service",
+      "tickets": [
+        "APP-2301",
+        "CSP-9075",
+        "CSP-9098",
+        "PEN-2024-034",
+        "SIEM-88165"
+      ]
+    },
+    {
+      "group": "idor-claims-get",
+      "tickets": [
+        "APP-2305",
+        "PEN-2024-021",
+        "PEN-2024-026",
+        "SCA-4480",
+        "SIEM-88275"
+      ]
+    },
+    {
+      "group": "public-s3-member-docs",
+      "tickets": [
+        "APP-2284",
+        "CSP-9080",
+        "CSP-9081",
+        "PEN-2024-031",
+        "SIEM-88220"
+      ]
+    },
+    {
+      "group": "sqli-claims-search",
+      "tickets": [
+        "APP-2291",
+        "PEN-2024-017",
+        "PEN-2024-019",
+        "SCA-4471",
+        "SIEM-88241",
+        "SIEM-88310"
+      ]
+    },
+    {
+      "group": "unsafe-yaml-doc-service",
+      "tickets": [
+        "APP-2240",
+        "PEN-2024-023",
+        "SCA-4402",
+        "SCA-4403",
+        "SIEM-88102",
+        "SIEM-88140"
+      ]
+    }
+  ],
+  "noise": [
+    {
+      "id": "APP-2259",
+      "reason": "unrelated"
+    },
+    {
+      "id": "APP-2275",
+      "reason": "unrelated"
+    },
+    {
+      "id": "APP-2312",
+      "reason": "decoy"
+    },
+    {
+      "id": "CSP-9120",
+      "reason": "decoy"
+    },
+    {
+      "id": "CSP-9131",
+      "reason": "unrelated"
+    },
+    {
+      "id": "SIEM-88199",
+      "reason": "unrelated"
+    },
+    {
+      "id": "SIEM-88230",
+      "reason": "unrelated"
+    },
+    {
+      "id": "SIEM-88260",
+      "reason": "unrelated"
+    }
+  ],
+  "totals": {
+    "tickets": 40,
+    "groups": 6,
+    "noise": 8
+  }
+}
