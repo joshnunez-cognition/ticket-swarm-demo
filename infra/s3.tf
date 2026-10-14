@@ -8,10 +8,10 @@ resource "aws_s3_bucket" "member_docs" {
 
 resource "aws_s3_bucket_public_access_block" "member_docs" {
   bucket                  = aws_s3_bucket.member_docs.id
-  block_public_acls       = false
-  block_public_policy     = false
-  ignore_public_acls      = false
-  restrict_public_buckets = false
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
 }
 
 resource "aws_s3_bucket_policy" "member_docs" {
@@ -19,11 +19,17 @@ resource "aws_s3_bucket_policy" "member_docs" {
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
-      Sid       = "AllowDocLinks"
-      Effect    = "Allow"
+      Sid       = "DenyInsecureTransport"
+      Effect    = "Deny"
       Principal = "*"
-      Action    = "s3:GetObject"
-      Resource  = "${aws_s3_bucket.member_docs.arn}/*"
+      Action    = "s3:*"
+      Resource = [
+        aws_s3_bucket.member_docs.arn,
+        "${aws_s3_bucket.member_docs.arn}/*",
+      ]
+      Condition = {
+        Bool = { "aws:SecureTransport" = "false" }
+      }
     }]
   })
 }
