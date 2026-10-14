@@ -34,3 +34,29 @@ def test_upload_endpoint_accepts_manifest():
     body = app(environ, lambda s, h: status.setdefault("s", s))
     assert status["s"].startswith("202")
     assert json.loads(body[0]) == {"accepted": "eob"}
+
+
+def test_python_object_tags_rejected(tmp_path):
+    marker = tmp_path / "pwned"
+    payload = (
+        "document_type: eob\nmember_ref: m-100\npages: 1\n"
+        f"x: !!python/object/apply:os.system ['touch {marker}']\n"
+    ).encode()
+    with pytest.raises(UploadError):
+        parse_manifest(payload)
+    assert not marker.exists()
+
+
+def test_upload_endpoint_rejects_python_object_tag(tmp_path):
+    marker = tmp_path / "pwned"
+    payload = f"!!python/object/apply:os.system ['touch {marker}']\n".encode()
+    environ = {
+        "PATH_INFO": "/upload",
+        "REQUEST_METHOD": "POST",
+        "CONTENT_LENGTH": str(len(payload)),
+        "wsgi.input": io.BytesIO(payload),
+    }
+    status = {}
+    app(environ, lambda s, h: status.setdefault("s", s))
+    assert status["s"].startswith("400")
+    assert not marker.exists()

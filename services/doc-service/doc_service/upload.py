@@ -12,7 +12,10 @@ def parse_manifest(raw: bytes) -> dict:
     """Parse the YAML manifest that accompanies every document upload."""
     if len(raw) > MAX_UPLOAD_BYTES:
         raise UploadError("manifest too large")
-    manifest = yaml.load(raw, Loader=yaml.Loader)
+    try:
+        manifest = yaml.safe_load(raw)
+    except yaml.YAMLError as exc:
+        raise UploadError("invalid manifest") from exc
     if not isinstance(manifest, dict):
         raise UploadError("manifest must be a mapping")
     missing = [f for f in REQUIRED_FIELDS if f not in manifest]
