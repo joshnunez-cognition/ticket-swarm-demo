@@ -1,0 +1,5 @@
+*                         @demo-health/secops
+/services/claims-api/     @demo-health/claims-eng
+/services/doc-service/    @demo-health/docs-eng
+/services/member-portal/  @demo-health/portal-eng
+/infra/                   @demo-health/platform-eng

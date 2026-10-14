@@ -1,0 +1,345 @@
+{
+  "exported": "2024-04-05T00:00:00Z",
+  "count": 40,
+  "tickets": [
+    {
+      "id": "PEN-2024-019",
+      "source": "pentest",
+      "created": "2024-03-29T00:00:00Z",
+      "title": "Verbose database errors returned to client",
+      "description": "Malformed input to the claims search function causes the raw database error message to be included in the HTTP 500 body, disclosing the query structure and table names. This materially assists the injection finding filed separately.",
+      "asset": "claims app (api tier)"
+    },
+    {
+      "id": "CSP-9131",
+      "source": "cloud_posture",
+      "created": "2024-03-27T08:00:00Z",
+      "title": "ACM certificate expires in 12 days",
+      "description": "Rule ACM.1 - Imported certificate for status.example.com expires 2024-04-08. Renewal is manual for imported certificates. Severity: medium.",
+      "asset": "acm cert status.example.com"
+    },
+    {
+      "id": "PEN-2024-021",
+      "source": "pentest",
+      "created": "2024-03-29T00:00:00Z",
+      "title": "Insecure direct object reference - any claim readable by any member",
+      "description": "Authenticated as a low-privilege member account we changed the numeric identifier in the claim detail request and received claim records belonging to unrelated members, including amounts and service descriptions. No ownership or role check appears to be performed. Identifiers are sequential so enumeration of the full table is trivial. Rated High.",
+      "asset": "claims app (api tier)"
+    },
+    {
+      "id": "PEN-2024-029",
+      "source": "pentest",
+      "created": "2024-03-31T00:00:00Z",
+      "title": "Static cloud credentials shipped with the portal application",
+      "description": "Review of the deployed portal bundle identified a static cloud access key pair in the application configuration rather than an instance role or secret manager reference. Anyone with read access to the repository or to a built artifact obtains the credential. Rated High. Recommend rotation, history purge, and migration to short-lived role credentials.",
+      "asset": "member portal"
+    },
+    {
+      "id": "SCA-4480",
+      "source": "dependency_scanner",
+      "created": "2024-04-02T06:12:11Z",
+      "title": "SAST: Route handler with no authorization check (CWE-639)",
+      "description": "Rule py/missing-authz-on-resource. A route that takes a resource identifier from the path resolves it without comparing it to the authenticated principal. 1 finding, severity medium. Heuristic rule, verify manually.",
+      "asset": "repo:ticket-swarm-demo path:services/claims-api/app",
+      "rule_id": "py/missing-authz-on-resource",
+      "severity": "medium"
+    },
+    {
+      "id": "SIEM-88140",
+      "source": "siem_alert",
+      "created": "2024-04-01T03:14:40Z",
+      "title": "Shell spawned by application process (doc-svc-prod-01)",
+      "description": "{\"detector\":\"process_lineage\",\"host\":\"doc-svc-prod-01\",\"parent\":\"python3 -m doc_service.app\",\"child\":\"/bin/sh -c id\",\"verdict\":\"suspicious\"} - single occurrence, no persistence observed.",
+      "asset": "doc-svc-prod-01"
+    },
+    {
+      "id": "SIEM-88165",
+      "source": "siem_alert",
+      "created": "2024-04-01T04:02:12Z",
+      "title": "Role credentials used for unusual API calls",
+      "description": "{\"detector\":\"role_behavior\",\"principal\":\"doc-service-prod\",\"new_apis\":[\"iam:ListRoles\",\"s3:ListAllMyBuckets\",\"secretsmanager:ListSecrets\"],\"first_seen\":true,\"source\":\"ec2 instance metadata\"} - calls outside the service baseline of s3:PutObject/GetObject.",
+      "asset": "arn:aws:iam::111122223333:role/doc-service-prod"
+    },
+    {
+      "id": "APP-2268",
+      "source": "app_bug",
+      "created": "2024-04-01T10:15:00Z",
+      "title": "portal deploy to the new region failed, wrong credentials?",
+      "description": "Tried to bring up the portal in us-west-2 for the DR test and the document links all 403. The region is hardcoded somewhere in the config with the keys, dev said. Please fix so we can finish the DR exercise.",
+      "asset": "member portal (dr test)"
+    },
+    {
+      "id": "PEN-2024-023",
+      "source": "pentest",
+      "created": "2024-03-30T00:00:00Z",
+      "title": "Remote code execution via config/manifest upload",
+      "description": "The document upload accepts an attached manifest which the service parses server-side. Supplying a YAML payload using a python object constructor tag resulted in command execution on the processing host; we confirmed with a DNS callout and a sleep. Impact: full compromise of the upload host and of the role it carries. Rated Critical.",
+      "asset": "doc upload service"
+    },
+    {
+      "id": "APP-2240",
+      "source": "app_bug",
+      "created": "2024-03-27T11:05:00Z",
+      "title": "upload hangs on large YAML manifests",
+      "description": "Ops uploads a batch manifest (~4MB yaml) and the upload spinner never finishes. Smaller files are fine. Happens on prod and staging. Might be a timeout? Someone said the parser is slow.",
+      "asset": "doc service upload"
+    },
+    {
+      "id": "SIEM-88260",
+      "source": "siem_alert",
+      "created": "2024-04-03T06:40:21Z",
+      "title": "Rate limit threshold exceeded - public marketing site",
+      "description": "{\"detector\":\"waf_rate_limit\",\"rule\":\"RateLimit-1000-5m\",\"action\":\"BLOCK\",\"uri\":\"/\",\"src\":\"203.0.113.9\",\"note\":\"crawler, robots respected after block\"}",
+      "asset": "cloudfront marketing site"
+    },
+    {
+      "id": "SCA-4471",
+      "source": "dependency_scanner",
+      "created": "2024-04-02T06:12:09Z",
+      "title": "SAST: Possible SQL injection (CWE-89) - 1 finding, HIGH",
+      "description": "Rule py/sql-string-format. Query string built via % formatting with data that reaches a DB execute() call. Introduced in commit range since last scan. Confidence: high. See rule docs for parameterized query guidance.",
+      "asset": "repo:ticket-swarm-demo path:services/claims-api/app",
+      "rule_id": "py/sql-string-format",
+      "severity": "high"
+    },
+    {
+      "id": "CSP-9098",
+      "source": "cloud_posture",
+      "created": "2024-03-25T08:00:00Z",
+      "title": "Privilege escalation path: instance profile to admin",
+      "description": "Analyzer finding: an EC2 instance tagged Service=doc-service carries an instance profile whose policy permits iam:* and sts:* via a wildcard, meaning any code execution on that host can create or assume additional principals. 1 path, 2 hops. Severity: high.",
+      "asset": "ec2 doc-svc-prod-01 / role doc-service-prod"
+    },
+    {
+      "id": "APP-2305",
+      "source": "app_bug",
+      "created": "2024-04-04T09:20:00Z",
+      "title": "member saw someone else's claim",
+      "description": "Caller says he bookmarked a claim page, opened it the next day and the claim shown was not his - different provider and amount. We could not reproduce with his account but he sent a screenshot. Escalating since it sounds like a privacy thing.",
+      "asset": "member portal -> claim detail"
+    },
+    {
+      "id": "SIEM-88230",
+      "source": "siem_alert",
+      "created": "2024-04-02T11:12:00Z",
+      "title": "DLP: PII pattern in outbound attachment (resolved)",
+      "description": "{\"detector\":\"dlp\",\"user\":\"j.doe\",\"rule\":\"ssn_pattern\",\"dest\":\"personal webmail\",\"action\":\"blocked\",\"review\":\"test fixture file with synthetic values, closed\"}",
+      "asset": "corp laptop LT-4412"
+    },
+    {
+      "id": "CSP-9112",
+      "source": "cloud_posture",
+      "created": "2024-03-26T08:00:00Z",
+      "title": "IAM user with long-lived access key (key age 412 days)",
+      "description": "Rule IAM.3 - Access keys should be rotated every 90 days. User portal-svc has one active key, last rotated 412 days ago, last used 2 days ago from region us-east-1. Severity: medium.",
+      "asset": "iam::user/portal-svc",
+      "rule_id": "IAM.3"
+    },
+    {
+      "id": "CSP-9080",
+      "source": "cloud_posture",
+      "created": "2024-03-24T08:00:00Z",
+      "title": "S3.8 - S3 Block Public Access setting should be enabled at bucket level",
+      "description": "FAILED. Bucket demo-health-member-docs has all four block public access settings disabled. Tag DataClass=phi. Severity: critical. Remediation: enable BlockPublicAcls, BlockPublicPolicy, IgnorePublicAcls, RestrictPublicBuckets.",
+      "asset": "arn:aws:s3:::demo-health-member-docs",
+      "rule_id": "S3.8",
+      "severity": "critical"
+    },
+    {
+      "id": "APP-2301",
+      "source": "app_bug",
+      "created": "2024-04-03T12:00:00Z",
+      "title": "doc-service can write to buckets it shouldn't",
+      "description": "While debugging the ingest retry we noticed the job wrote a test object into the analytics bucket, which is not its bucket. Nobody granted that explicitly as far as we know. Probably a permissions config thing.",
+      "asset": "doc service"
+    },
+    {
+      "id": "CSP-9075",
+      "source": "cloud_posture",
+      "created": "2024-03-24T08:00:02Z",
+      "title": "IAM.1 - Policies should not allow full '*' administrative privileges",
+      "description": "FAILED. Inline policy doc-service-access attached to role doc-service-prod allows Action '*' on Resource '*'. The role is reachable from an instance profile. Severity: critical.",
+      "asset": "arn:aws:iam::111122223333:role/doc-service-prod",
+      "rule_id": "IAM.1",
+      "severity": "critical"
+    },
+    {
+      "id": "PEN-2024-031",
+      "source": "pentest",
+      "created": "2024-03-31T00:00:00Z",
+      "title": "Member documents retrievable without authentication",
+      "description": "Object storage used for member documents responded to unauthenticated GET requests for object keys obtained from portal links. Keys follow a predictable members/<ref>/<type>/<file> layout, so documents for other members were retrievable once a single link was observed. Rated Critical.",
+      "asset": "member document storage"
+    },
+    {
+      "id": "SCA-4455",
+      "source": "dependency_scanner",
+      "created": "2024-04-02T06:11:58Z",
+      "title": "Secret detected: AWS access key id (CWE-798)",
+      "description": "secret-scanning rule aws-access-key-id matched a 20 character AKIA string together with a 40 character secret in a committed JSON configuration file. Entropy check passed. Validity of the credential was not checked by this scanner. Present in history.",
+      "asset": "repo:ticket-swarm-demo path:services/member-portal/config",
+      "rule_id": "aws-access-key-id",
+      "severity": "critical"
+    },
+    {
+      "id": "CSP-9120",
+      "source": "cloud_posture",
+      "created": "2024-03-26T08:00:01Z",
+      "title": "S3.2 - Bucket policy grants read to Principal '*'",
+      "description": "FAILED. Bucket demo-health-static-site-assets allows s3:GetObject to all principals. Tags: DataClass=public, Purpose=public-website. Severity: critical (rule default, context not evaluated).",
+      "asset": "arn:aws:s3:::demo-health-static-site-assets",
+      "rule_id": "S3.2",
+      "severity": "critical"
+    },
+    {
+      "id": "SCA-4403",
+      "source": "dependency_scanner",
+      "created": "2024-03-25T05:03:45Z",
+      "title": "SAST: Unsafe YAML deserialization (CWE-502)",
+      "description": "Rule py/unsafe-deserialization. yaml.load() called with yaml.Loader on request-controlled bytes. Use yaml.safe_load(). 1 finding, severity high.",
+      "asset": "repo:ticket-swarm-demo path:services/doc-service",
+      "rule_id": "py/unsafe-deserialization",
+      "severity": "high"
+    },
+    {
+      "id": "APP-2284",
+      "source": "app_bug",
+      "created": "2024-04-02T15:30:00Z",
+      "title": "document links keep working after logout",
+      "description": "QA noticed that if you copy an EOB download link from the portal and paste it in a private window with no session you still get the PDF. Expected it to ask for login. Filing as a bug, not sure which team owns the file storage.",
+      "asset": "member portal -> documents"
+    },
+    {
+      "id": "SIEM-88199",
+      "source": "siem_alert",
+      "created": "2024-04-01T17:05:44Z",
+      "title": "EDR: generic trojan detection on build agent (false positive)",
+      "description": "{\"detector\":\"edr_signature\",\"host\":\"build-agent-07\",\"file\":\"/tmp/npm-cache/.../esbuild\",\"verdict\":\"Generic.Trojan.Heur\",\"analyst_note\":\"known FP on packed node binaries, vendor case opened, hash allowlisted\"}",
+      "asset": "build-agent-07"
+    },
+    {
+      "id": "SIEM-88275",
+      "source": "siem_alert",
+      "created": "2024-04-03T19:31:11Z",
+      "title": "Sequential resource enumeration detected",
+      "description": "{\"detector\":\"enum_scan\",\"principal\":\"token-***bob\",\"path_pattern\":\"/claims/{id}\",\"distinct_ids\":612,\"status_200\":598,\"window\":\"9m\"} - a single member session read 598 distinct claim records successfully.",
+      "asset": "alb/claims-api-prod"
+    },
+    {
+      "id": "SIEM-88241",
+      "source": "siem_alert",
+      "created": "2024-04-03T14:22:51Z",
+      "title": "WAF signature match: SQLI_PATTERN_UNION_SELECT (x37)",
+      "description": "{\"rule\":\"AWS-AWSManagedRulesSQLiRuleSet\",\"action\":\"COUNT\",\"count\":37,\"uri\":\"/claims/search\",\"src\":\"198.51.100.42\",\"ua\":\"python-requests/2.31\"} - repeated matches from a single source over 11 minutes. Mode is COUNT not BLOCK so requests were forwarded to origin.",
+      "asset": "alb/claims-api-prod"
+    },
+    {
+      "id": "PEN-2024-017",
+      "source": "pentest",
+      "created": "2024-03-28T00:00:00Z",
+      "title": "Authenticated SQL injection in claims search endpoint",
+      "description": "During testing of the claims application we were able to append a boolean condition to the search parameter and alter the result set. Payload of the form ' OR '1'='1 returned claim records belonging to other members. Error-based extraction of the sqlite_master table was also possible. Rated High. Recommend prepared statements with bound parameters.",
+      "asset": "claims app (api tier)"
+    },
+    {
+      "id": "APP-2312",
+      "source": "app_bug",
+      "created": "2024-04-04T13:45:00Z",
+      "title": "secure message inbox times out for long-tenure members",
+      "description": "Members with thousands of messages get a spinner then a timeout on the inbox tab. Someone in the channel said it's a sql problem so tagging security too in case it's the injection thing.",
+      "asset": "member portal -> secure messages"
+    },
+    {
+      "id": "PEN-2024-026",
+      "source": "pentest",
+      "created": "2024-03-30T00:00:00Z",
+      "title": "Claim identifiers are predictable",
+      "description": "Claim resources are addressed by a small incrementing integer. Combined with weak access control on the detail endpoint this allows bulk retrieval. Recommend both an authorization check and non-guessable identifiers.",
+      "asset": "claims app (api tier)"
+    },
+    {
+      "id": "PEN-2024-034",
+      "source": "pentest",
+      "created": "2024-03-31T00:00:00Z",
+      "title": "Excessive instance role permissions amplify host compromise",
+      "description": "The role available from the document processing host is effectively administrative. After obtaining execution on that host (see the upload finding) we were able to enumerate and read unrelated storage, and could have created new principals. Recommend scoping the policy to the specific object storage and queue actions the service needs.",
+      "asset": "document processing host"
+    },
+    {
+      "id": "APP-2275",
+      "source": "app_bug",
+      "created": "2024-04-01T08:30:00Z",
+      "title": "MFA reset request - contractor laptop replaced",
+      "description": "Contractor got a new laptop, authenticator enrollment lost. Needs an MFA reset after identity verification. Routine, filing here because the helpdesk queue is backed up.",
+      "asset": "identity provider"
+    },
+    {
+      "id": "CSP-9081",
+      "source": "cloud_posture",
+      "created": "2024-03-24T08:00:01Z",
+      "title": "S3.2 - Bucket policy grants read to Principal '*'",
+      "description": "FAILED. A bucket policy statement allows s3:GetObject to all principals on demo-health-member-docs/*. Public read of objects confirmed by the evaluation engine. Severity: critical.",
+      "asset": "arn:aws:s3:::demo-health-member-docs",
+      "rule_id": "S3.2",
+      "severity": "critical"
+    },
+    {
+      "id": "SCA-4402",
+      "source": "dependency_scanner",
+      "created": "2024-03-25T05:03:44Z",
+      "title": "PyYAML 5.3.1 - CVE-2020-14343 (CRITICAL, 9.8)",
+      "description": "pkg:pypi/pyyaml@5.3.1 is affected by CVE-2020-14343: arbitrary code execution when processing untrusted YAML with the full Loader. Also GHSA-8q59-q68h-6hv4. Fixed in 5.4. Direct dependency. Reachability: not computed.",
+      "asset": "requirements.txt (doc-service)",
+      "cve": "CVE-2020-14343",
+      "cvss": 9.8
+    },
+    {
+      "id": "APP-2259",
+      "source": "app_bug",
+      "created": "2024-03-29T09:10:00Z",
+      "title": "suspicious email reported by employee",
+      "description": "Employee forwarded a message claiming to be from the benefits team asking to confirm login details at a look-alike domain (benefits-demohealth.example.com). No credentials entered per the reporter. Forwarded to the mailbox team for blocking.",
+      "asset": "corp email"
+    },
+    {
+      "id": "APP-2291",
+      "source": "app_bug",
+      "created": "2024-04-03T16:40:00Z",
+      "title": "search box breaks when you type an apostrophe",
+      "description": "If a member types a name with an apostrophe (O'Neill) in claim search the page returns a 500 and the error panel shows something about a sql syntax error near unterminated string. Reported twice by the call center. Low priority but looks ugly.",
+      "asset": "member portal -> claims search"
+    },
+    {
+      "id": "SIEM-88310",
+      "source": "siem_alert",
+      "created": "2024-04-04T02:07:18Z",
+      "title": "Anomalous query volume - claims-api-prod-01",
+      "description": "{\"detector\":\"db_query_anomaly\",\"host\":\"claims-api-prod-01\",\"metric\":\"rows_returned_p99\",\"baseline\":12,\"observed\":4180,\"window\":\"5m\"} - one API caller returned ~350x the normal row count. No deploy in window.",
+      "asset": "claims-api-prod-01"
+    },
+    {
+      "id": "SIEM-88220",
+      "source": "siem_alert",
+      "created": "2024-04-02T07:19:33Z",
+      "title": "Unauthenticated object reads on sensitive bucket",
+      "description": "{\"detector\":\"s3_anon_access\",\"bucket\":\"demo-health-member-docs\",\"requester\":\"anonymous\",\"requests_24h\":1463,\"distinct_keys\":1102,\"src_asns\":[\"hosting-provider\",\"residential-isp\"]} - access logs show anonymous GETs across many keys.",
+      "asset": "s3/demo-health-member-docs"
+    },
+    {
+      "id": "SIEM-88102",
+      "source": "siem_alert",
+      "created": "2024-03-31T21:55:02Z",
+      "title": "Unexpected outbound connection from doc-svc-prod-01",
+      "description": "{\"detector\":\"egress_baseline\",\"host\":\"doc-svc-prod-01\",\"dest\":\"203.0.113.77:443\",\"proc\":\"python3\",\"bytes_out\":214980,\"first_seen\":true} - host does not normally egress to the public internet except to the package mirror.",
+      "asset": "doc-svc-prod-01"
+    },
+    {
+      "id": "SIEM-88190",
+      "source": "siem_alert",
+      "created": "2024-04-01T13:48:27Z",
+      "title": "API call from access key outside normal network",
+      "description": "{\"detector\":\"cred_use_anomaly\",\"principal\":\"portal-svc\",\"key\":\"AKIA...MPLE\",\"src_ip\":\"192.0.2.55\",\"asn\":\"hosting-provider\",\"usual_src\":\"vpc-0a1b2c3d\",\"api\":\"s3:ListBucket\"} - key used from an address that is not in the VPC ranges this principal normally calls from.",
+      "asset": "iam::user/portal-svc"
+    }
+  ]
+}

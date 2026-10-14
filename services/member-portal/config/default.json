@@ -1,0 +1,11 @@
+{
+  "port": 3000,
+  "sessionTtlMinutes": 30,
+  "aws": {
+    "region": "us-east-1",
+    "accessKeyId": "AKIAIOSFODNN7EXAMPLE",
+    "secretAccessKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+    "docsBucket": "demo-health-member-docs"
+  },
+  "claimsApiUrl": "http://claims-api.internal.example.com"
+}

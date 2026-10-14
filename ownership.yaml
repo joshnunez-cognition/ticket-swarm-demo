@@ -1,0 +1,35 @@
+# Service -> owning team. Used for routing security work items.
+teams:
+  claims-eng:
+    slack: "#claims-eng"
+    oncall: claims-eng-oncall@example.com
+  docs-eng:
+    slack: "#docs-eng"
+    oncall: docs-eng-oncall@example.com
+  portal-eng:
+    slack: "#portal-eng"
+    oncall: portal-eng-oncall@example.com
+  platform-eng:
+    slack: "#platform-eng"
+    oncall: platform-oncall@example.com
+  secops:
+    slack: "#secops"
+    oncall: secops-oncall@example.com
+
+services:
+  claims-api:
+    path: services/claims-api
+    team: claims-eng
+    data_class: phi
+  doc-service:
+    path: services/doc-service
+    team: docs-eng
+    data_class: phi
+  member-portal:
+    path: services/member-portal
+    team: portal-eng
+    data_class: pii
+  infra:
+    path: infra
+    team: platform-eng
+    escalation: secops
